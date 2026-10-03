@@ -1,0 +1,145 @@
+<%- include('../../partials/siteHeader', {pageTitle: "Edit " + movie.title}) %>
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold text-white mb-1">Edit Movie</h2>
+                    <p class="text-secondary mb-0">Update movie details in the collection</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="/movies/show/<%= movie._id %>" class="btn-cinema-outline">
+                        <i class="bi bi-eye"></i> View Details
+                    </a>
+                    <a href="/movies" class="btn-cinema-outline">
+                        <i class="bi bi-arrow-left"></i> Back to Movies
+                    </a>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <form action="/movies/update" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<%= movie._id %>">
+
+                    <div class="row g-4">
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <label for="title" class="form-label form-label-custom">
+                                    <i class="bi bi-film me-1 text-danger"></i> Movie Title <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-cinema" id="title" name="title" 
+                                       value="<%= movie.title %>" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <label for="year" class="form-label form-label-custom">
+                                        <i class="bi bi-calendar-event me-1 text-danger"></i> Release Year <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" class="form-control form-control-cinema" id="year" name="year" 
+                                           value="<%= movie.year %>" min="1880" max="2100" required>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label for="genres" class="form-label form-label-custom">
+                                        <i class="bi bi-tags me-1 text-danger"></i> Genres
+                                    </label>
+                                    <input type="text" class="form-control form-control-cinema" id="genres" name="genres" 
+                                           value="<%= (movie.genres && Array.isArray(movie.genres)) ? movie.genres.join(', ') : (movie.genres || '') %>">
+                                    <small class="text-muted">Separate with commas</small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="cast" class="form-label form-label-custom">
+                                    <i class="bi bi-people me-1 text-danger"></i> Cast
+                                </label>
+                                <input type="text" class="form-control form-control-cinema" id="cast" name="cast" 
+                                       value="<%= (movie.cast && Array.isArray(movie.cast)) ? movie.cast.join(', ') : (movie.cast || '') %>">
+                                <small class="text-muted">Comma-separated actor names</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="thumbnail" class="form-label form-label-custom">
+                                    <i class="bi bi-link-45deg me-1 text-danger"></i> Poster Image URL
+                                </label>
+                                <input type="url" class="form-control form-control-cinema" id="thumbnail" name="thumbnail" 
+                                       value="<%= movie.thumbnail || '' %>" oninput="previewUrl(this.value)">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="photo" class="form-label form-label-custom">
+                                    <i class="bi bi-upload me-1 text-danger"></i> Replace with Uploaded Image
+                                </label>
+                                <input type="file" class="form-control form-control-cinema" id="photo" name="photo" 
+                                       accept="image/*" onchange="previewFile(this)">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="extract" class="form-label form-label-custom">
+                                    <i class="bi bi-text-paragraph me-1 text-danger"></i> Synopsis / Extract
+                                </label>
+                                <textarea class="form-control form-control-cinema" id="extract" name="extract" 
+                                          rows="4"><%= movie.extract || '' %></textarea>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-cinema">
+                                    <i class="bi bi-check2-circle"></i> Update Movie
+                                </button>
+                                <a href="/movies/show/<%= movie._id %>" class="btn-cinema-outline">Cancel</a>
+                            </div>
+                        </div>
+
+                        <!-- Poster Preview Column -->
+                        <div class="col-md-5">
+                            <label class="form-label form-label-custom d-block">Poster Preview</label>
+                            <div class="preview-box" id="previewContainer">
+                                <% if (movie.thumbnail) { %>
+                                    <img src="<%= movie.thumbnail %>" id="photoPreview" alt="<%= movie.title %>">
+                                    <div class="text-center text-muted" id="previewPlaceholder" style="display: none;">
+                                        <i class="bi bi-image fs-1 d-block mb-2"></i>
+                                        <small>No image preview</small>
+                                    </div>
+                                <% } else { %>
+                                    <div class="text-center text-muted" id="previewPlaceholder">
+                                        <i class="bi bi-image fs-1 d-block mb-2"></i>
+                                        <small>No image preview</small>
+                                    </div>
+                                    <img src="" id="photoPreview" alt="Poster preview" style="display: none;">
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewFile(inputFile) {
+        const file = inputFile.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById("photoPreview");
+                img.src = e.target.result;
+                img.style.display = "block";
+                document.getElementById("previewPlaceholder").style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function previewUrl(url) {
+        if (url && url.trim().length > 10) {
+            const img = document.getElementById("photoPreview");
+            img.src = url.trim();
+            img.style.display = "block";
+            document.getElementById("previewPlaceholder").style.display = "none";
+        }
+    }
+</script>
+
+<%- include('../../partials/siteFooter') %>

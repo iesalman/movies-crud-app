@@ -1,0 +1,111 @@
+<%- include('../../partials/siteHeader', {pageTitle: movie ? movie.title : "Movie Details"}) %>
+
+<div class="container py-4">
+    <% if (movie) { %>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="/movies" class="btn-cinema-outline">
+                <i class="bi bi-arrow-left"></i> Back to Movies
+            </a>
+            <div class="d-flex gap-2">
+                <a href="/movies/updateForm/<%= movie._id %>" class="btn btn-cinema-outline text-info">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <button type="button" class="btn btn-cinema-outline text-danger" 
+                        onclick="confirmDelete('<%= movie._id %>', '<%= movie.title.replace(/'/g, '\\\'') %>')">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <div class="row g-4 align-items-start">
+                <div class="col-md-4 text-center">
+                    <div class="preview-box p-0 shadow-lg">
+                        <% if (movie.thumbnail) { %>
+                            <img src="<%= movie.thumbnail %>" alt="<%= movie.title %>" class="w-100 h-100" style="object-fit: cover;"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'poster-fallback\'><i class=\'bi bi-film fs-1\'></i><span>No Poster</span></div>';">
+                        <% } else { %>
+                            <div class="poster-fallback">
+                                <i class="bi bi-film fs-1"></i>
+                                <span>No Poster</span>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center gap-3 mb-2 flex-wrap">
+                        <h1 class="fw-bold text-white mb-0"><%= movie.title %></h1>
+                        <% if (movie.year) { %>
+                            <span class="badge bg-danger fs-6 px-3 py-2"><%= movie.year %></span>
+                        <% } %>
+                    </div>
+
+                    <% if (movie.genres && movie.genres.length > 0) { %>
+                        <div class="movie-tags mb-3 mt-2">
+                            <% movie.genres.forEach(function(g) { %>
+                                <a href="/movies/genre/<%= g %>" class="tag-genre text-decoration-none px-3 py-1 fs-6">
+                                    <i class="bi bi-tag-fill me-1 text-danger"></i><%= g %>
+                                </a>
+                            <% }); %>
+                        </div>
+                    <% } %>
+
+                    <hr class="border-secondary opacity-25 my-4">
+
+                    <div class="mb-4">
+                        <h5 class="text-secondary fw-semibold mb-2">
+                            <i class="bi bi-file-earmark-text text-danger me-2"></i>Synopsis
+                        </h5>
+                        <p class="text-light lh-lg fs-6 mb-0">
+                            <%= movie.extract || 'No synopsis available for this title.' %>
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-secondary fw-semibold mb-2">
+                            <i class="bi bi-people text-danger me-2"></i>Cast
+                        </h5>
+                        <% if (movie.cast && movie.cast.length > 0) { %>
+                            <div class="d-flex flex-wrap gap-2">
+                                <% movie.cast.forEach(function(actor) { %>
+                                    <span class="badge bg-dark border border-secondary text-light px-3 py-2">
+                                        <%= actor %>
+                                    </span>
+                                <% }); %>
+                            </div>
+                        <% } else { %>
+                            <p class="text-muted mb-0">Cast information not listed.</p>
+                        <% } %>
+                    </div>
+
+                    <% if (movie.href) { %>
+                        <div>
+                            <a href="https://en.wikipedia.org/wiki/<%= movie.href %>" target="_blank" rel="noopener noreferrer" 
+                               class="btn-cinema-outline btn-sm">
+                                <i class="bi bi-box-arrow-up-right me-1"></i> Wikipedia Article
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="content-box text-center py-5">
+            <i class="bi bi-exclamation-triangle text-warning fs-1 mb-3 d-block"></i>
+            <h3 class="text-white">Movie Not Found</h3>
+            <p class="text-secondary mb-4">The requested movie could not be found or has been removed.</p>
+            <a href="/movies" class="btn btn-cinema">Return to Movies</a>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    function confirmDelete(id, title) {
+        if (confirm("Are you sure you want to delete \"" + title + "\"?")) {
+            window.location.href = "/movies/destroy/" + id;
+        }
+    }
+</script>
+
+<%- include('../../partials/siteFooter') %>

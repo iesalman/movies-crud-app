@@ -389,6 +389,56 @@ body {
 }
 
 /* Forms & Details */
+/* Genre Selection Chips */
+.genre-selector-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    max-height: 180px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.genre-checkbox-label {
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.genre-checkbox-input {
+    display: none;
+}
+
+.genre-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition);
+}
+
+.genre-chip:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.genre-checkbox-input:checked + .genre-chip {
+    background: var(--accent-red);
+    color: #fff;
+    border-color: var(--accent-red);
+    box-shadow: 0 2px 8px var(--accent-glow);
+}
+
 .content-box {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);

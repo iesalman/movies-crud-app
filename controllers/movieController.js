@@ -36,7 +36,14 @@ const byGenre = (req, res) => {
 }
 
 const createForm = (req, res) => {
-    res.render("pages/movies/createForm");
+    movieModel.getAllGenres()
+        .then(allGenres => {
+            res.render("pages/movies/createForm", { allGenres });
+        })
+        .catch(err => {
+            console.error(err);
+            res.render("pages/movies/createForm", { allGenres: [] });
+        });
 }
 
 const store = (req, res) => {
@@ -79,12 +86,12 @@ const show = (req, res) => {
 
 const updateForm = (req, res) => {
     const id = req.params.id;
-    movieModel.show(id)
-        .then(movie => {
+    Promise.all([movieModel.show(id), movieModel.getAllGenres()])
+        .then(([movie, allGenres]) => {
             if (!movie) {
                 return res.redirect("/movies");
             }
-            res.render("pages/movies/updateForm", { movie });
+            res.render("pages/movies/updateForm", { movie, allGenres });
         })
         .catch(err => {
             console.error(err);

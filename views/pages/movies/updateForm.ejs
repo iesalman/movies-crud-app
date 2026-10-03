@@ -32,22 +32,40 @@
                                        value="<%= movie.title %>" required>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-6 mb-3">
-                                    <label for="year" class="form-label form-label-custom">
-                                        <i class="bi bi-calendar-event me-1 text-danger"></i> Release Year <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="number" class="form-control form-control-cinema" id="year" name="year" 
-                                           value="<%= movie.year %>" min="1880" max="2100" required>
+                            <div class="mb-3">
+                                <label for="year" class="form-label form-label-custom">
+                                    <i class="bi bi-calendar-event me-1 text-danger"></i> Release Year <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" class="form-control form-control-cinema" id="year" name="year" 
+                                       value="<%= movie.year %>" min="1880" max="2100" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label form-label-custom">
+                                    <i class="bi bi-tags me-1 text-danger"></i> Select Genres
+                                </label>
+                                <div class="genre-selector-container">
+                                    <% 
+                                        const currentGenres = Array.isArray(movie.genres) 
+                                            ? movie.genres 
+                                            : (typeof movie.genres === 'string' ? movie.genres.split(',').map(s => s.trim()) : []);
+                                    %>
+                                    <% if (typeof allGenres !== 'undefined' && allGenres.length > 0) { %>
+                                        <% allGenres.forEach(function(g) { %>
+                                            <% const isChecked = currentGenres.some(cg => cg.toLowerCase() === g.toLowerCase()); %>
+                                            <label class="genre-checkbox-label">
+                                                <input type="checkbox" name="genres" value="<%= g %>" class="genre-checkbox-input" <%= isChecked ? 'checked' : '' %>>
+                                                <span class="genre-chip">
+                                                    <i class="bi bi-tag-fill small"></i>
+                                                    <%= g %>
+                                                </span>
+                                            </label>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <input type="text" class="form-control form-control-cinema" name="genres" value="<%= currentGenres.join(', ') %>">
+                                    <% } %>
                                 </div>
-                                <div class="col-sm-6 mb-3">
-                                    <label for="genres" class="form-label form-label-custom">
-                                        <i class="bi bi-tags me-1 text-danger"></i> Genres
-                                    </label>
-                                    <input type="text" class="form-control form-control-cinema" id="genres" name="genres" 
-                                           value="<%= (movie.genres && Array.isArray(movie.genres)) ? movie.genres.join(', ') : (movie.genres || '') %>">
-                                    <small class="text-muted">Separate with commas</small>
-                                </div>
+                                <small class="text-muted">Click on genres to select/unselect</small>
                             </div>
 
                             <div class="mb-3">

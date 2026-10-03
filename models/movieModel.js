@@ -92,10 +92,19 @@ async function destroy(id) {
     return result;
 }
 
+async function getAllGenres() {
+    const client = await MongoClient.connect(mongoConnection);
+    const db = client.db();
+    const genres = await db.collection("movies").distinct("genres");
+    await client.close();
+    return genres.filter(g => g && typeof g === "string" && g.trim().length > 0).sort();
+}
+
 module.exports = {
     index,
     moviesSearch,
     getByGenre,
+    getAllGenres,
     show,
     store,
     update,

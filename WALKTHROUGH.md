@@ -26,11 +26,11 @@
    - **Delete**:
      - Route: `GET /movies/destroy/:id` with JavaScript confirmation dialog.
 
-### 2. UI Enhancement (Modern Dark Cinema Theme)
+### 2. UI Enhancement (Modern Light Cinema Theme)
 
 - **Color Palette & Typography**:
   - Implemented sleek dark theme using Google Font `Plus Jakarta Sans`.
-  - Cinema red accent highlights (`#e50914`), soft glowing shadows, and subtle glassmorphism navbar.
+  - Blue accent highlights on a light palette, soft shadows, and a subtle glassmorphism navbar.
 - **Components**:
   - Rounded search input with search icon.
   - Interactive genre pill buttons with active states.

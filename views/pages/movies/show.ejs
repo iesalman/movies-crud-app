@@ -35,9 +35,9 @@
 
                 <div class="col-md-8">
                     <div class="d-flex align-items-center gap-3 mb-2 flex-wrap">
-                        <h1 class="fw-bold text-white mb-0"><%= movie.title %></h1>
+                        <h1 class="fw-bold mb-0"><%= movie.title %></h1>
                         <% if (movie.year) { %>
-                            <span class="badge bg-danger fs-6 px-3 py-2"><%= movie.year %></span>
+                            <span class="badge badge-year fs-6 px-3 py-2"><%= movie.year %></span>
                         <% } %>
                     </div>
 
@@ -45,7 +45,7 @@
                         <div class="movie-tags mb-3 mt-2">
                             <% movie.genres.forEach(function(g) { %>
                                 <a href="/movies/genre/<%= g %>" class="tag-genre text-decoration-none px-3 py-1 fs-6">
-                                    <i class="bi bi-tag-fill me-1 text-danger"></i><%= g %>
+                                    <i class="bi bi-tag-fill me-1 text-accent"></i><%= g %>
                                 </a>
                             <% }); %>
                         </div>
@@ -55,21 +55,21 @@
 
                     <div class="mb-4">
                         <h5 class="text-secondary fw-semibold mb-2">
-                            <i class="bi bi-file-earmark-text text-danger me-2"></i>Synopsis
+                            <i class="bi bi-file-earmark-text text-accent me-2"></i>Synopsis
                         </h5>
-                        <p class="text-light lh-lg fs-6 mb-0">
+                        <p class="text-body lh-lg fs-6 mb-0">
                             <%= movie.extract || 'No synopsis available for this title.' %>
                         </p>
                     </div>
 
                     <div class="mb-4">
                         <h5 class="text-secondary fw-semibold mb-2">
-                            <i class="bi bi-people text-danger me-2"></i>Cast
+                            <i class="bi bi-people text-accent me-2"></i>Cast
                         </h5>
                         <% if (movie.cast && movie.cast.length > 0) { %>
                             <div class="d-flex flex-wrap gap-2">
                                 <% movie.cast.forEach(function(actor) { %>
-                                    <span class="badge bg-dark border border-secondary text-light px-3 py-2">
+                                    <span class="badge cast-badge border px-3 py-2">
                                         <%= actor %>
                                     </span>
                                 <% }); %>
@@ -93,7 +93,7 @@
     <% } else { %>
         <div class="content-box text-center py-5">
             <i class="bi bi-exclamation-triangle text-warning fs-1 mb-3 d-block"></i>
-            <h3 class="text-white">Movie Not Found</h3>
+            <h3>Movie Not Found</h3>
             <p class="text-secondary mb-4">The requested movie could not be found or has been removed.</p>
             <a href="/movies" class="btn btn-cinema">Return to Movies</a>
         </div>

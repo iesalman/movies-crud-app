@@ -5,7 +5,7 @@
         <div class="col-lg-10">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h2 class="fw-bold text-white mb-1">Add New Movie</h2>
+                    <h2 class="fw-bold mb-1">Add New Movie</h2>
                     <p class="text-secondary mb-0">Fill in the details to add a new movie to the collection</p>
                 </div>
                 <a href="/movies" class="btn-cinema-outline">
@@ -19,7 +19,7 @@
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="title" class="form-label form-label-custom">
-                                    <i class="bi bi-film me-1 text-danger"></i> Movie Title <span class="text-danger">*</span>
+                                    <i class="bi bi-film me-1 text-accent"></i> Movie Title <span class="text-accent">*</span>
                                 </label>
                                 <input type="text" class="form-control form-control-cinema" id="title" name="title" 
                                        placeholder="e.g. Inception, The Dark Knight" required>
@@ -27,14 +27,14 @@
 
                             <div class="mb-3">
                                 <label for="year" class="form-label form-label-custom">
-                                    <i class="bi bi-calendar-event me-1 text-danger"></i> Release Year <span class="text-danger">*</span>
+                                    <i class="bi bi-calendar-event me-1 text-accent"></i> Release Year <span class="text-accent">*</span>
                                 </label>
                                 <input type="number" class="form-control form-control-cinema" id="year" name="year" 
                                        placeholder="2024" min="1880" max="2100" value="2024" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label form-label-custom">
-                                    <i class="bi bi-tags me-1 text-danger"></i> Select Genres
+                                    <i class="bi bi-tags me-1 text-accent"></i> Select Genres
                                 </label>
                                 <div class="genre-selector-container">
                                     <% if (typeof allGenres !== 'undefined' && allGenres.length > 0) { %>
@@ -56,7 +56,7 @@
 
                             <div class="mb-3">
                                 <label for="cast" class="form-label form-label-custom">
-                                    <i class="bi bi-people me-1 text-danger"></i> Cast
+                                    <i class="bi bi-people me-1 text-accent"></i> Cast
                                 </label>
                                 <input type="text" class="form-control form-control-cinema" id="cast" name="cast" 
                                        placeholder="e.g. Leonardo DiCaprio, Joseph Gordon-Levitt">
@@ -65,7 +65,7 @@
 
                             <div class="mb-3">
                                 <label for="thumbnail" class="form-label form-label-custom">
-                                    <i class="bi bi-link-45deg me-1 text-danger"></i> Poster Image URL (Optional)
+                                    <i class="bi bi-link-45deg me-1 text-accent"></i> Poster Image URL (Optional)
                                 </label>
                                 <input type="url" class="form-control form-control-cinema" id="thumbnail" name="thumbnail" 
                                        placeholder="https://example.com/poster.jpg" oninput="previewUrl(this.value)">
@@ -73,7 +73,7 @@
 
                             <div class="mb-3">
                                 <label for="photo" class="form-label form-label-custom">
-                                    <i class="bi bi-upload me-1 text-danger"></i> Or Upload Poster File
+                                    <i class="bi bi-upload me-1 text-accent"></i> Or Upload Poster File
                                 </label>
                                 <input type="file" class="form-control form-control-cinema" id="photo" name="photo" 
                                        accept="image/*" onchange="previewFile(this)">
@@ -81,7 +81,7 @@
 
                             <div class="mb-4">
                                 <label for="extract" class="form-label form-label-custom">
-                                    <i class="bi bi-text-paragraph me-1 text-danger"></i> Synopsis / Extract
+                                    <i class="bi bi-text-paragraph me-1 text-accent"></i> Synopsis / Extract
                                 </label>
                                 <textarea class="form-control form-control-cinema" id="extract" name="extract" 
                                           rows="4" placeholder="Brief story overview..."></textarea>

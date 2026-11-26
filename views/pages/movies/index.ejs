@@ -3,7 +3,7 @@
 <div class="container py-4">
     <!-- Search & Hero Section -->
     <section class="hero-search text-center">
-        <h2 class="fw-bold mb-2 text-white">Find Your Next Movie</h2>
+        <h2 class="fw-bold mb-2">Find Your Next Movie</h2>
         <p class="text-secondary mb-4">Browse recent releases, explore genres, or search by title</p>
 
         <div class="search-container">
@@ -42,7 +42,7 @@
     <section class="mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
-                <h3 class="h4 fw-bold text-white mb-0">
+                <h3 class="h4 fw-bold mb-0">
                     <% if (typeof activeGenre !== 'undefined' && activeGenre && activeGenre !== 'all') { %>
                         Recent <%= activeGenre.charAt(0).toUpperCase() + activeGenre.slice(1) %> Movies
                     <% } else if (typeof searchQuery !== 'undefined' && searchQuery) { %>
@@ -107,7 +107,7 @@
         <% } else { %>
             <div class="content-box text-center py-5">
                 <i class="bi bi-film text-secondary fs-1 mb-3 d-block"></i>
-                <h4 class="text-white">No Movies Found</h4>
+                <h4>No Movies Found</h4>
                 <p class="text-secondary mb-4">No matching movies found in this category.</p>
                 <a href="/movies" class="btn btn-cinema">Back to All Movies</a>
             </div>

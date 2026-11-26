@@ -5,7 +5,7 @@
         <div class="col-lg-10">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h2 class="fw-bold text-white mb-1">Edit Movie</h2>
+                    <h2 class="fw-bold mb-1">Edit Movie</h2>
                     <p class="text-secondary mb-0">Update movie details in the collection</p>
                 </div>
                 <div class="d-flex gap-2">
@@ -26,7 +26,7 @@
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="title" class="form-label form-label-custom">
-                                    <i class="bi bi-film me-1 text-danger"></i> Movie Title <span class="text-danger">*</span>
+                                    <i class="bi bi-film me-1 text-accent"></i> Movie Title <span class="text-accent">*</span>
                                 </label>
                                 <input type="text" class="form-control form-control-cinema" id="title" name="title" 
                                        value="<%= movie.title %>" required>
@@ -34,7 +34,7 @@
 
                             <div class="mb-3">
                                 <label for="year" class="form-label form-label-custom">
-                                    <i class="bi bi-calendar-event me-1 text-danger"></i> Release Year <span class="text-danger">*</span>
+                                    <i class="bi bi-calendar-event me-1 text-accent"></i> Release Year <span class="text-accent">*</span>
                                 </label>
                                 <input type="number" class="form-control form-control-cinema" id="year" name="year" 
                                        value="<%= movie.year %>" min="1880" max="2100" required>
@@ -42,7 +42,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label form-label-custom">
-                                    <i class="bi bi-tags me-1 text-danger"></i> Select Genres
+                                    <i class="bi bi-tags me-1 text-accent"></i> Select Genres
                                 </label>
                                 <div class="genre-selector-container">
                                     <% 
@@ -70,7 +70,7 @@
 
                             <div class="mb-3">
                                 <label for="cast" class="form-label form-label-custom">
-                                    <i class="bi bi-people me-1 text-danger"></i> Cast
+                                    <i class="bi bi-people me-1 text-accent"></i> Cast
                                 </label>
                                 <input type="text" class="form-control form-control-cinema" id="cast" name="cast" 
                                        value="<%= (movie.cast && Array.isArray(movie.cast)) ? movie.cast.join(', ') : (movie.cast || '') %>">
@@ -79,7 +79,7 @@
 
                             <div class="mb-3">
                                 <label for="thumbnail" class="form-label form-label-custom">
-                                    <i class="bi bi-link-45deg me-1 text-danger"></i> Poster Image URL
+                                    <i class="bi bi-link-45deg me-1 text-accent"></i> Poster Image URL
                                 </label>
                                 <input type="url" class="form-control form-control-cinema" id="thumbnail" name="thumbnail" 
                                        value="<%= movie.thumbnail || '' %>" oninput="previewUrl(this.value)">
@@ -87,7 +87,7 @@
 
                             <div class="mb-3">
                                 <label for="photo" class="form-label form-label-custom">
-                                    <i class="bi bi-upload me-1 text-danger"></i> Replace with Uploaded Image
+                                    <i class="bi bi-upload me-1 text-accent"></i> Replace with Uploaded Image
                                 </label>
                                 <input type="file" class="form-control form-control-cinema" id="photo" name="photo" 
                                        accept="image/*" onchange="previewFile(this)">
@@ -95,7 +95,7 @@
 
                             <div class="mb-4">
                                 <label for="extract" class="form-label form-label-custom">
-                                    <i class="bi bi-text-paragraph me-1 text-danger"></i> Synopsis / Extract
+                                    <i class="bi bi-text-paragraph me-1 text-accent"></i> Synopsis / Extract
                                 </label>
                                 <textarea class="form-control form-control-cinema" id="extract" name="extract" 
                                           rows="4"><%= movie.extract || '' %></textarea>
